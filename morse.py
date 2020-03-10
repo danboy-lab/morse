@@ -1,3 +1,4 @@
+import winsound
 
 def codificar():
 	texto = input('Texto para morse -> ')
@@ -31,6 +32,24 @@ def codificar():
 	texto = texto.replace("z", " --..")
 	texto = texto.strip()
 	print(texto)
+	z = len(texto)
+	c = 0
+	while c < z:
+		if texto[c] == ".":
+			frequency = 2500  # Set Frequency To 2500 Hertz
+			duration = 500  # Set Duration To 1000 ms == 1 second
+			winsound.Beep(frequency, duration)
+			c+=1
+		elif texto[c] == "-":
+			frequency = 2500  # Set Frequency To 2500 Hertz
+			duration = 1000  # Set Duration To 1000 ms == 1 second
+			winsound.Beep(frequency, duration)
+			c+=1
+		else:
+			frequency = 32767  # Set Frequency To 2500 Hertz
+			duration = 0  # Set Duration To 1000 ms == 1 second
+			winsound.Beep(frequency, duration)
+			c+=1
 def decodificar():
 	texto = input('Texto para morse -> ')
 	texto = texto.lower()
