@@ -1,70 +1,40 @@
-text_to_morse_dict = {
-    " ": " / ",
-    "a": " .-",
-    "b": " -...",
-    "c": " -.-.",
-    "d": " -..",
-    "e": " .",
-    "f": " ..-.",
-    "g": " --.",
-    "h": " ....",
-    "i": " ..",
-    "j": " .---",
-    "k": " -.-",
-    "l": " .-..",
-    "m": " --",
-    "n": " -.",
-    "o": " ---",
-    "p": " .--.",
-    "q": " --.-",
-    "r": " .-.",
-    "s": " ...",
-    "t": " -",
-    "u": " ..-",
-    "v": " ...-",
-    "w": ".--",
-    "x": " -..-",
-    "y": " -.--",
-    "z": " --.."
-}
-morse_to_text_dict = dict()
-
-# Criando o dicionario ao contrario
-for key, value in text_to_morse_dict.items():
-    morse_to_text_dict[value] = key
+from dict import text_to_morse_dict, morse_to_text_dict
 
 
-def codificar():
-    texto = input('Texto para morse -> ').lower()
-    new_texto = ''
-    for letter in texto:
-        new_texto += text_to_morse_dict[letter]
-
-    print(new_texto)
-
-
-def decodificar():
-    # O código a seguir não funciona corretamente, mas está no caminho
-
-    # texto = input('Texto em morse -> ')
-    # texto = texto.split()
-    # new_texto = ''
-    # for letter in texto:
-    #     new_texto += morse_to_text_dict[letter]
-
-    # print(new_texto)
-    pass
+def encode():
+    text = input('Text to morse -> ').lower()
+    result = ' '.join(
+        text_to_morse_dict.get(char, '?')
+        for char in text
+    )
+    print(result)
 
 
-x = int(input('Deseja codificar ou decodificar?\nCodificar = 1\nDecodificar = 2\n~> '))
+def decode():
+    morse = input('Morse to text -> ').strip()
+    result = ''.join(
+        morse_to_text_dict.get(symbol, '?')
+        for symbol in morse.split()
+    )
+    print(result)
 
-if x == 1:
-    codificar()
-elif x == 2:
-    print('Ainda não Implementado!')
-else:
-    while x != 1 or 2:
-        x = int(
-            input('Deseja codificar ou decodificar?\nCodificar = 1\nDecodificar = 2\n~> '))
-        if x == 1:
-            codificar()
+
+def get_option():
+    while True:
+        option = input(
+            'Choose an option:\n'
+            'Encode = 1\n'
+            'Decode = 2\n-> '
+        )
+        if option in ('1', '2'):
+            return int(option)
+
+
+def main():
+    if get_option() == 1:
+        encode()
+    else:
+        decode()
+
+
+main()
